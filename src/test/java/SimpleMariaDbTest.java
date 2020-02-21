@@ -30,12 +30,12 @@ public class SimpleMariaDbTest {
             .withUsername(USER)
             .withPassword(PWD)
             //init script to create and populate dB with test data
-            .withInitScript("docker/mysql-init/edan_prod_CONTENT_CONFIG.sql")
-            .withInitScript("docker/mysql-init/edan_prod_CONTENT_OBJECTS.sql")
-            .withInitScript("docker/mysql-init/edan_prod_CONTENT_OBJECTS_AWS.sql")
-            .withInitScript("docker/mysql-init/edan_prod_CONTENT_PROPERTIES.sql")
-            .withInitScript("docker/mysql-init/edan_prod_CONTENT_REPO.sql")
-            .withInitScript("docker/mysql-init/edan_prod_CONTENT_VERSIONS.sql")
+//            .withInitScript("docker/mysql-init/init_CONTENT_CONFIG.sql")
+            .withInitScript("docker/mysql-init/init_CONTENT_OBJECTS.sql")
+//            .withInitScript("docker/mysql-init/init_CONTENT_OBJECTS_AWS.sql")
+//            .withInitScript("docker/mysql-init/init_CONTENT_PROPERTIES.sql")
+//            .withInitScript("docker/mysql-init/init_CONTENT_REPO.sql")
+//            .withInitScript("docker/mysql-init/init_CONTENT_VERSIONS.sql")
             .withEnv("MYSQL_ROOT_HOST", "%")
             .withLogConsumer(logConsumer);;
 

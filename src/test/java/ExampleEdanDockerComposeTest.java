@@ -31,7 +31,7 @@ import static org.junit.Assert.assertEquals;
  */
 public class ExampleEdanDockerComposeTest {
 
-    private static final Logger logger = LoggerFactory.getLogger(SimpleMySQLTest.class);
+    private static final Logger logger = LoggerFactory.getLogger(ExampleEdanDockerComposeTest.class);
     private static Slf4jLogConsumer logConsumer = new Slf4jLogConsumer(logger);
 
     private static final String DB_NAME = "edan_prod";
@@ -105,7 +105,7 @@ public class ExampleEdanDockerComposeTest {
         long numfound = rsp.getResults().getNumFound();
         logger.info("solr numFound = {}", numfound);
 
-        assertEquals("Record count does not match", 20, numfound);
+        assertEquals("Record count does not match", 10, numfound);
     }
 
     /**

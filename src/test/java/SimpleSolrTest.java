@@ -1,7 +1,9 @@
 import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.SolrServerException;
+import org.apache.solr.client.solrj.impl.Http2SolrClient;
 import org.apache.solr.client.solrj.impl.HttpSolrClient;
+import org.apache.solr.client.solrj.impl.SolrHttpClientBuilder;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.client.solrj.response.UpdateResponse;
 import org.apache.solr.common.SolrDocument;
@@ -12,14 +14,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testcontainers.containers.BindMode;
 import org.testcontainers.containers.GenericContainer;
-import org.testcontainers.containers.MySQLContainer;
 import org.testcontainers.containers.output.Slf4jLogConsumer;
+import org.testcontainers.containers.wait.strategy.Wait;
+import org.testcontainers.containers.wait.strategy.WaitStrategy;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -43,7 +42,8 @@ public class SimpleSolrTest {
             .withFileSystemBind("src/test/resources/docker/edan2_search", "/opt/solr/server/solr/mycores/search", BindMode.READ_WRITE)
             .withExposedPorts(8983)
             .withPrivilegedMode(true)
-            .withLogConsumer(logConsumer);
+            .withLogConsumer(logConsumer)
+            .waitingFor(Wait.forHttp("/solr/search/admin/ping").forStatusCode(200));;
 
     @Test
     public void test_solrSearch() throws IOException, SolrServerException {
