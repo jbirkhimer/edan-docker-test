@@ -29,10 +29,6 @@ public class SimpleSolrTest {
     private static final Logger logger = LoggerFactory.getLogger(SimpleSolrTest.class);
     private static Slf4jLogConsumer logConsumer = new Slf4jLogConsumer(logger);
 
-    private static final String DB_NAME = "edan_prod";
-    private static final String USER = "edanUser";
-    private static final String PWD = "edanPass";
-
     // Add MYSQL_ROOT_HOST environment so that we can root login from anywhere for testing purposes
     @Rule
     public GenericContainer solrContainer = (GenericContainer) new GenericContainer("solr:6.6.1")
