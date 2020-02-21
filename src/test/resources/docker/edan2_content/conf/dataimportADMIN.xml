@@ -1,0 +1,38 @@
+<dataConfig>
+    <!-- data source for database, tags and lists -->
+    <dataSource name="db" type="JdbcDataSource" driver="com.mysql.jdbc.Driver"
+        url="jdbc:mysql://lassb-service01.si.edu,lassb-service02.si.edu/edan_prod?rewriteBatchedStatements=true" user="edan_admin"
+        password="ibMN+uf#3ujhfwkRRrsf" batchSize="1"/>
+    <document>
+        <!-- outer query is to get all records from raw index -->
+          <!--   xquery="type:edanmdm" -->
+        <entity name="raw" dataSource="null" processor="SolrEntityProcessor"
+            onError="skip"
+            url="http://coreloading:9000/solr/datarepom"
+            query="id:edanmdm-siris_aeci_1"
+            fl="extension,loader_id,app_id,type,content,linked_id,url,hash,id,timestamp,last_time_updated,status,public_search,doc_signature,version,status,unit_code,title,boost" 
+            rows="50000" transformer="TemplateTransformer">
+
+            <field column="app_id" name="app_id"/>
+            <field column="type" name="type"/>
+            <field column="content" name="content"/>
+            <field column="linked_id" name="linked_id"/>
+            <field column="url" name="url"/>
+            <field column="hash" name="hash"/>
+            <field column="id" name="id"/>
+            <field column="timestamp" name="timestamp" />
+            <field column="last_time_updated" name="last_time_updated"/>
+            <field column="status" name="status"/>
+            <field column="public_search" name="public_search"/>
+            <field column="doc_signature" name="doc_signature"/>
+            <field column="id" name="version"/>
+            <field column="status" name="status"/>
+            <field column="unit_code" name="unit_code"/>
+            <field column="boost" name="boost"/>
+            <field column="extension" name="extension"/>
+            <field column="loader_id" name="loader_id"/>
+        </entity>
+
+
+    </document>
+</dataConfig>

@@ -1,0 +1,1 @@
+use multistage docker build to pull repos from github and build jars

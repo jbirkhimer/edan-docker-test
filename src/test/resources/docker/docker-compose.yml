@@ -1,0 +1,32 @@
+version: "3.7"
+
+services:
+
+  # content_objects:9011 solr 6.6.1
+  edan2_content:
+    image: solr:6.6.1
+    ports:
+      - 9011:8983
+    volumes:
+      - ./edan2_content:/opt/solr/server/solr/mycores/content_objects
+
+  # search:9111 solr 6.6.1
+  edan2_search:
+    image: solr:6.6.1
+    ports:
+      - 9111:8983
+    volumes:
+      - ./edan2_search:/opt/solr/server/solr/mycores/search
+
+  db:
+    image: mariadb:10.1.44
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
+      MYSQL_DATABASE: $MYSQL_DATABASE
+      MYSQL_USER: $MYSQL_USER
+      MYSQL_PASSWORD: $MYSQL_PASSWORD
+    ports:
+      - 3307:3306
+    volumes:
+      - ./mysql-init/:/docker-entrypoint-initdb.d/

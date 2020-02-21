@@ -1,0 +1,53 @@
+<dataConfig>
+    <dataSource name="db" type="JdbcDataSource" driver="com.mysql.jdbc.Driver"
+        url="jdbc:mysql://lassb-service01.si.edu,lassb-service02.si.edu/edan_prod?rewriteBatchedStatements=true" user="edan_admin"
+        password="ibMN+uf#3ujhfwkRRrsf" batchSize="1"/>
+    <document>
+        <entity name="raw" dataSource="db" processor="SqlEntityProcessor" pk="id"
+            onError="skip" query="select * from CONTENT_OBJECTS where last_time_updated > '${dih.last_index_time}'" transformer="TemplateTransformer,edu.si.siris.solr.plugins.update.JsonKeyIndexerTransformer">
+
+<field column="app_id" name="app_id"/>
+<field column="type" name="type"/>
+<field column="content" name="content"/>
+<field column="linked_id" name="linked_id"/>
+<field column="url" name="url"/>
+<field column="hash" name="hash"/>
+<field column="id" name="id"/>
+<field column="timestamp" name="timestamp" dateTimeFormat="yyyy-MM-dd'T'HH:mm:ss" locale="en"/>
+<field column="last_time_updated" name="last_time_updated" dateTimeFormat="yyyy-MM-dd'T'HH:mm:ss" locale="en"/>
+<field column="status" name="status"/>
+<field column="public_search" name="public_search"/>
+<field column="doc_signature" name="doc_signature"/>
+<field column="version" name="version"/>
+<field column="unit_code" name="unit_code"/>
+<field column="title" name="title"/>
+<field column="extension" name="extension"/>
+<field column="loader_id" name="loader_id"/>
+
+        </entity>
+
+        <entity name="raw-repo" dataSource="db" processor="SqlEntityProcessor" pk="id"
+            onError="skip" query="select * from CONTENT_REPO where (type='transproject' OR type='transasset') AND last_time_updated > '${dih.last_index_time}'" transformer="TemplateTransformer,edu.si.siris.solr.plugins.update.JsonKeyIndexerTransformer">
+
+<field column="app_id" name="app_id"/>
+<field column="type" name="type"/>
+<field column="content" name="content"/>
+<field column="linked_id" name="linked_id"/>
+<field column="url" name="url"/>
+<field column="hash" name="hash"/>
+<field column="id" name="id"/>
+<field column="timestamp" name="timestamp" dateTimeFormat="yyyy-MM-dd'T'HH:mm:ss" locale="en"/>
+<field column="last_time_updated" name="last_time_updated" dateTimeFormat="yyyy-MM-dd'T'HH:mm:ss" locale="en"/>
+<field column="status" name="status"/>
+<field column="public_search" name="public_search"/>
+<field column="doc_signature" name="doc_signature"/>
+<field column="version" name="version"/>
+<field column="unit_code" name="unit_code"/>
+<field column="title" name="title"/>
+<field column="extension" name="extension"/>
+<field column="loader_id" name="loader_id"/>
+
+        </entity>
+
+    </document>
+</dataConfig>

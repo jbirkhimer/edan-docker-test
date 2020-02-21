@@ -1,0 +1,58 @@
+<dataConfig>
+    <document>
+        <!-- outer query is to get all records from raw index -->
+        <entity name="raw" dataSource="null" processor="SolrEntityProcessor"
+            onError="skip"
+            url="http://localhost:9000/solr/datarepom" xquery="timestamp:[NOW/DAY-1DAY TO NOW]" query="_last_time_updated:[${dataimporter.functions.formatDate(dih.last_index_time, 'yyyy-MM-dd'T'HH:mm:ss'Z'')} TO NOW]" fl="extension,loader_id,app_id,type,content,linked_id,url,hash,id,timestamp,last_time_updated,status,public_search,doc_signature,version,status,unit_code,title,boost" rows="50000" transformer="TemplateTransformer,edu.si.siris.solr.plugins.update.JsonKeyIndexerTransformer">
+
+<field column="app_id" name="app_id"/>
+<field column="type" name="type"/>
+<field column="content" name="content"/>
+<field column="linked_id" name="linked_id"/>
+<field column="url" name="url"/>
+<field column="hash" name="hash"/>
+<field column="id" name="id"/>
+<field column="timestamp" name="timestamp" />
+<field column="last_time_updated" name="last_time_updated"/>
+<field column="status" name="status"/>
+<field column="public_search" name="public_search"/>
+<field column="doc_signature" name="doc_signature"/>
+<field column="id" name="version"/>
+<field column="status" name="status"/>
+<field column="unit_code" name="unit_code"/>
+<field column="boost" name="boost"/>
+<field column="extension" name="extension"/>
+<field column="loader_id" name="loader_id"/>
+
+
+        </entity>
+
+        <!-- outer query is to get all records from raw index -->
+        <entity name="ead" dataSource="null" processor="SolrEntityProcessor"
+            onError="skip"
+            url="http://localhost:9000/solr/eadr" xquery="*:*" query="last_time_updated:[${dataimporter.functions.formatDate(dih.ead.last_index_time, 'yyyy-MM-dd'T'HH:mm:ss'Z'')} TO NOW]" fl="extension,loader_id,app_id,type,content,linked_id,url,hash,id,timestamp,last_time_updated,status,public_search,doc_signature,version,status,unit_code,title,boost" rows="50000" transformer="TemplateTransformer">
+
+<field column="app_id" name="app_id"/>
+<field column="type" name="type"/>
+<field column="content" name="content"/>
+<field column="linked_id" name="linked_id"/>
+<field column="url" name="url"/>
+<field column="hash" name="hash"/>
+<field column="id" name="id"/>
+<field column="timestamp" name="timestamp" />
+<field column="last_time_updated" name="last_time_updated"/>
+<field column="status" name="status"/>
+<field column="public_search" name="public_search"/>
+<field column="doc_signature" name="doc_signature"/>
+<field column="id" name="version"/>
+<field column="status" name="status"/>
+<field column="unit_code" name="unit_code"/>
+<field column="boost" name="boost"/>
+<field column="extension" name="extension"/>
+<field column="loader_id" name="loader_id"/>
+
+
+        </entity>
+
+    </document>
+</dataConfig>
